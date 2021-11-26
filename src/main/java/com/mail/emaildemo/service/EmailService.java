@@ -1,9 +1,9 @@
 package com.mail.emaildemo.service;
 
-import com.mail.emaildemo.model.EmailResponse;
+import com.mail.emaildemo.request.EmailRequest;
 
 public interface EmailService {
 
-	void sendMail(EmailResponse email);
+	void sendMail(EmailRequest email);
 
 }

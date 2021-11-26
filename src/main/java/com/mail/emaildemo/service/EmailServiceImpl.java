@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import com.mail.emaildemo.config.EmailConfig;
-import com.mail.emaildemo.model.EmailResponse;
+import com.mail.emaildemo.request.EmailRequest;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -17,9 +17,9 @@ public class EmailServiceImpl implements EmailService {
 	private EmailConfig emailConfig;
 	
 	@Override
-	public void sendMail(EmailResponse email)
-	{
-		JavaMailSenderImpl mailSender=new JavaMailSenderImpl();
+	public void sendMail(EmailRequest email) {
+		
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setHost(emailConfig.getHost());
 		mailSender.setPort(emailConfig.getPort());
 		mailSender.setUsername(emailConfig.getUsername());
@@ -32,12 +32,11 @@ public class EmailServiceImpl implements EmailService {
         javaMailProperties.put("mail.debug", "true");
         mailSender.setJavaMailProperties(javaMailProperties);
 		
-		SimpleMailMessage mailMessage=new SimpleMailMessage();
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(email.getEmailTo());
 		mailMessage.setSubject(email.getSubject());
 		mailMessage.setText(email.getMessage());
 		
 		mailSender.send(mailMessage);
 	}
-
 }

@@ -1,10 +1,10 @@
-package com.mail.emaildemo.model;
+package com.mail.emaildemo.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class EmailResponse {
+public class EmailRequest {
 	
 	@NotNull
 	private String subject;
@@ -14,7 +14,11 @@ public class EmailResponse {
 	private String emailTo;
 	
 	@NotNull
-	@Min(10)
+	@Email
+	private String emailFrom;
+	
+	@NotNull
+	@Min(5)
 	private String message;
 
 	public String getSubject() {
@@ -41,4 +45,16 @@ public class EmailResponse {
 		this.message = message;
 	}
 
+	public String getEmailFrom() {
+		return emailFrom;
+	}
+
+	public void setEmailFrom(String emailFrom) {
+		this.emailFrom = emailFrom;
+	}
+	
+	@Override
+	public String toString() {
+		return "EmailRequest [subject=" + subject + ", emailTo=" + emailTo + ", message=" + message + "]";
+	}
 }
